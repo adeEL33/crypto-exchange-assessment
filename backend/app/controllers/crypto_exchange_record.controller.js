@@ -1,6 +1,6 @@
 const CrptoExchangeRecord = require("../models/crypto_exchange_record.model.js");
 const coinRates = require('coin-rates');
-
+const { make } = require('simple-body-validator');
 // Create and Save a new CrptoExchangeRecord
 exports.create = (req, res) => {
   // Validate request
@@ -8,8 +8,25 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Content can not be empty!"
     });
+    return;
   }
 
+  const rules = {
+      currency_from: 'required|string|min:3',
+      currency_from: 'required|string|min:3',
+      amount_1: 'required|strict|integer|min:0',
+      amount_2: 'required|strict|integer|min:0',
+  };
+
+  const validator = make(req.body, rules)
+  if (! validator.validate()) {
+      res.json({
+        status: "error",
+        msg: "Validation error",
+        errors:validator.errors().all()
+      })
+      return;
+  }
   // Create a CrptoExchangeRecord
   const crypto_exchange_record = new CrptoExchangeRecord({
     currency_from:req.body.currency_from,
@@ -21,12 +38,23 @@ exports.create = (req, res) => {
 
   // Save CrptoExchangeRecord in the database
   CrptoExchangeRecord.create(crypto_exchange_record, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the CrptoExchangeRecord."
-      });
-    else res.send(data);
+    if (err){
+      res.json({
+        status: "error",
+        msg: err.message || "Some error occurred while creating the CrptoExchangeRecord.",
+        data:null
+      })
+      return;
+    }
+    else 
+    {
+      res.json({
+        status: "success",
+        msg: "data saved successfully",
+        data:data
+      })
+      return;
+    }
   });
 };
 
@@ -35,12 +63,20 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
 
   CrptoExchangeRecord.getAll(title, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving crypto_exchange_records."
-      });
-    else res.send(data);
+    if (err){
+      res.json({
+        status: "error",
+        msg: err.message || "Some error occurred while creating the CrptoExchangeRecord.",
+        data:null
+      })
+    }
+    else{
+      res.json({
+        status: "success",
+        msg: "data fetched successfully",
+        data:data
+      })
+    }
   });
 };
 
