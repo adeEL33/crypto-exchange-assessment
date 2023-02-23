@@ -14,9 +14,10 @@ function Form({ handleLoading }) {
     const handleStateChange = (e) => {
         // console.log(e.target.name,e.target.value);
         setState({ ...state, [e.target.name]: e.target.value });
-        exchangeCurrency();
+        
     }
 
+    
     const handleSaveFormRecord = () => {
         handleLoading(true);
         axios.post('http://localhost:8080/api/crypto_exchange_record', state).then((res) => {
@@ -28,6 +29,7 @@ function Form({ handleLoading }) {
                     amount_2: 0,
                     type: 'exchanged'
                 })
+                setErrors(new ErrorHandling())
                 toast.success('Record is saved!')
             } else if (res.data.status == 'error') {
                 console.log(res.data);
@@ -41,21 +43,26 @@ function Form({ handleLoading }) {
     }
 
     const exchangeCurrency = () => {
-        if (state?.currency_from != '' && state?.currency_to != "" && state?.amount_1 != "") {
+        if (state?.currency_from != '' && state?.currency_to != "" ) {
             handleLoading(true);
             axios.post('http://localhost:8080/api/crypto_exchange_record/exchange', {
                 'currency_from': state?.currency_from,
                 'currency_to': state?.currency_to,
-                'amount_1': state?.amount_1
+                'amount_1': state?.amount_1 == '' ? 1 : state?.amount_1
             }).then((res) => {
                 if (res.data.status == 'success') {
-                    setState({amount_2: res.data.rate });
+                    setState({...state,amount_2: parseInt(state?.amount_1)*res.data.rate });
                 }
             }).catch((err) => {
                 console.log(err);
             }).finally(() => handleLoading(false))
         }
     }
+
+    useEffect(() => {
+        exchangeCurrency();
+    },[state.currency_from,state.currency_to,state.amount_1])
+    
     return (
         <div className="card">
             <div className="card-header bg-transparent">
@@ -68,9 +75,9 @@ function Form({ handleLoading }) {
                             <label>Currency From</label>
 
                             <select className="form-control" name="currency_from" onChange={handleStateChange}>
-                                <option value="">select</option>
-                                <option value="BTC">BTC</option>
-                                <option value="ETH">ETH</option>
+                                <option selected={state?.currency_from == ""} value="">select</option>
+                                <option selected={state?.currency_from == "BTC"} value="BTC">BTC</option>
+                                <option selected={state?.currency_from == "ETH"} value="ETH">ETH</option>
                             </select>
                             {
                                 errors.has('currency_from') ? (
@@ -100,10 +107,10 @@ function Form({ handleLoading }) {
                         <div className="form-group">
                             <label>Currency To</label>
                             <select className="form-control" name="currency_to" onChange={handleStateChange}>
-                                <option value="">select</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
+                                <option selected={state?.currency_from == ""} value="">select</option>
+                                <option selected={state?.currency_from == "USD"} value="USD">USD</option>
+                                <option selected={state?.currency_from == "EUR"} value="EUR">EUR</option>
+                                <option selected={state?.currency_from == "GBP"} value="GBP">GBP</option>
                             </select>
                             {
                                 errors.has('currency_to') ? (

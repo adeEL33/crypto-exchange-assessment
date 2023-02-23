@@ -23,32 +23,24 @@ CrptoExchangeRecord.create = (newCrptoExchangeRecord, result) => {
   });
 };
 
-CrptoExchangeRecord.findById = (id, result) => {
-  sql.query(`SELECT * FROM crypto_exchange_records WHERE id = ${id}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      // console.log("found crypto_exchange_record: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-
-    // not found CrptoExchangeRecord with the id
-    result({ kind: "not_found" }, null);
-  });
-};
-
-CrptoExchangeRecord.getAll = (title, result) => {
+CrptoExchangeRecord.getAll = (sort_type,sort_column,date,type, result) => {
   let query = "SELECT * FROM crypto_exchange_records";
 
-  if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
+  if (date) {
+    query += ` WHERE DATE_FORMAT(dated,'%Y-%m-%d') = '${date}' `;
   }
 
+  if (date && type){
+    query += ' & ';
+  }
+  if (type) {
+    query += ` WHERE type = '${type}' `;
+  }
+  
+  if(sort_type && sort_column){
+    query += ` ORDER BY ${sort_column} ${sort_type}`;
+  }
+  
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);

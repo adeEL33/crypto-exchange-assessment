@@ -12,10 +12,10 @@ exports.create = (req, res) => {
   }
 
   const rules = {
-      currency_from: 'required|string|min:3',
-      currency_to: 'required|string|min:3',
-      amount_1: 'required|strict|integer|min:1',
-      amount_2: 'required|strict|integer|gt:0',
+      currency_from: 'required|min:3',
+      currency_to: 'required|min:3',
+      amount_1: 'required|integer|min:1',
+      amount_2: 'required|numeric|gt:0',
   };
 
   const validator = make(req.body, rules)
@@ -60,9 +60,13 @@ exports.create = (req, res) => {
 
 // Retrieve all CrptoExchangeRecords from the database (with condition).
 exports.findAll = (req, res) => {
-  const title = req.query.title;
+  const date = req.query.date;
+  const sort_type = req.query.sort_type;
+  const sort_column = req.query.sort_column;
+  const type = req.query.type;
 
-  CrptoExchangeRecord.getAll(title, (err, data) => {
+
+  CrptoExchangeRecord.getAll(sort_type,sort_column,date,type, (err, data) => {
     if (err){
       res.json({
         status: "error",
