@@ -18,7 +18,7 @@ CrptoExchangeRecord.create = (newCrptoExchangeRecord, result) => {
       return;
     }
 
-    console.log("created crypto_exchange_record: ", { id: res.insertId, ...newCrptoExchangeRecord });
+    // console.log("created crypto_exchange_record: ", { id: res.insertId, ...newCrptoExchangeRecord });
     result(null, { id: res.insertId, ...newCrptoExchangeRecord });
   });
 };
@@ -32,7 +32,7 @@ CrptoExchangeRecord.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found crypto_exchange_record: ", res[0]);
+      // console.log("found crypto_exchange_record: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -56,75 +56,7 @@ CrptoExchangeRecord.getAll = (title, result) => {
       return;
     }
 
-    console.log("crypto_exchange_records: ", res);
-    result(null, res);
-  });
-};
-
-CrptoExchangeRecord.getAllPublished = result => {
-  sql.query("SELECT * FROM crypto_exchange_records WHERE published=true", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-
-    console.log("crypto_exchange_records: ", res);
-    result(null, res);
-  });
-};
-
-CrptoExchangeRecord.updateById = (id, crypto_exchange_record, result) => {
-  sql.query(
-    "UPDATE crypto_exchange_records SET title = ?, description = ?, published = ? WHERE id = ?",
-    [crypto_exchange_record.title, crypto_exchange_record.description, crypto_exchange_record.published, id],
-    (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-
-      if (res.affectedRows == 0) {
-        // not found CrptoExchangeRecord with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
-
-      console.log("updated crypto_exchange_record: ", { id: id, ...crypto_exchange_record });
-      result(null, { id: id, ...crypto_exchange_record });
-    }
-  );
-};
-
-CrptoExchangeRecord.remove = (id, result) => {
-  sql.query("DELETE FROM crypto_exchange_records WHERE id = ?", id, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-
-    if (res.affectedRows == 0) {
-      // not found CrptoExchangeRecord with the id
-      result({ kind: "not_found" }, null);
-      return;
-    }
-
-    console.log("deleted crypto_exchange_record with id: ", id);
-    result(null, res);
-  });
-};
-
-CrptoExchangeRecord.removeAll = result => {
-  sql.query("DELETE FROM crypto_exchange_records", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-
-    console.log(`deleted ${res.affectedRows} crypto_exchange_records`);
+    // console.log("crypto_exchange_records: ", res);
     result(null, res);
   });
 };

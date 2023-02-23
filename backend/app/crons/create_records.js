@@ -35,7 +35,6 @@ exports.create = () => {
                     to: toCurrency,
                   },
                 }).then(rate => {
-                  console.log(rate);
                   const crypto_exchange_record = new CrptoExchangeRecord({
                     currency_from:fromCurrency,
                     currency_to:toCurrency,
