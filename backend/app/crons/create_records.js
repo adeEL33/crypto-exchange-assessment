@@ -39,7 +39,7 @@ exports.create = () => {
                   const crypto_exchange_record = new CrptoExchangeRecord({
                     currency_from:fromCurrency,
                     currency_to:toCurrency,
-                    amount_1:rate,
+                    amount_1:1,
                     amount_2:rate,
                     type:'live_price',
                   });

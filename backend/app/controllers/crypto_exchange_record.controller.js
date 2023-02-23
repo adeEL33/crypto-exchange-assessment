@@ -13,9 +13,9 @@ exports.create = (req, res) => {
 
   const rules = {
       currency_from: 'required|string|min:3',
-      currency_from: 'required|string|min:3',
-      amount_1: 'required|strict|integer|min:0',
-      amount_2: 'required|strict|integer|min:0',
+      currency_to: 'required|string|min:3',
+      amount_1: 'required|strict|integer|min:1',
+      amount_2: 'required|strict|integer|gt:0',
   };
 
   const validator = make(req.body, rules)

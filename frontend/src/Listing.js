@@ -1,9 +1,8 @@
 function Listing() {
     return (
-        <div class="card mt-5">
-        <div class="card-body">
-
-            <table class="table table-striped table-responsive">
+        <div className="card mt-5">
+        <div className="card-body">
+            <table className="table table-striped table-responsive">
     
                 <tbody>
                     <tr>
