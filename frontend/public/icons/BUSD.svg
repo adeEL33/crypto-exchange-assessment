@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41" height="35" viewBox="0 0 41 35">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-BUSD);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-BUSD">
+      <rect width="41" height="35"/>
+    </clipPath>
+  </defs>
+  <g id="BUSD" class="cls-1">
+    <rect class="cls-2" width="41" height="35"/>
+    <image id="BUSD-2" data-name="BUSD" width="32" height="32" transform="translate(4 2)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABiklEQVR4Xq2WQXKDMAxFWXZgwxGybW/Q0+YILJPSRadddMsRfAQgPQBFTNyab0mWg//MWwTJ+sJxHFVVhsaubae3xq0sAsN4eTrhusNKmArUDutka3qvu7hwHnNfn7GuSVjoKFhfFS4uBfqwwkUat6+X5ef7NXqugX47YbIGmXsVaWLumzMmSoTmjzVRd+hvfnvOnIR5KdDcYQKHxdy+E8E9EQdjLOZe1iY28/HSnjCA5Jh7WZqgq72a+mbAAAdKi5FwPc/6NcQP/6E3Dz9zxTmF8dROiA2E244xDycurjXBNsB955jDSYtLTbANUDJKK05KxW+fz5GP2AARNpEqnopL5oTYAIHbxikV18wJ8y3IKRVPma8M1fixzXkY2PHImTCYL3/zIwY4cs6ExZwI/wscBjksZ8JqHg2tcYIOJ7s5M5TQkIBJEtyZyDGfr8KkjIkaYRM55gT67oTJGtREUXMvXFQK9FGFi4+C9U2ar/ZJWYaZgHM1Ge8JMN7/zkvoPj9qI5zb5rwM/QJ8Sl+EJfPWTAAAAABJRU5ErkJggg=="/>
+  </g>
+</svg>

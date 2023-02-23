@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41" height="35" viewBox="0 0 41 35">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-USDT);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-USDT">
+      <rect width="41" height="35"/>
+    </clipPath>
+  </defs>
+  <g id="USDT" class="cls-1">
+    <rect class="cls-2" width="41" height="35"/>
+    <image id="USDT-2" data-name="USDT" width="32" height="32" transform="translate(5 3)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA+ElEQVR4Xu2UPwrCMBhHOzt7BQd3L+gV8lGKdCx4DsFRcHHQjkIv4CqIdrDaviRNGlOnPnhLft+/KUkyMWFD5BnZFVfY0Zvj6A0bY+qEDbWLojiGyDnuA0QOWkNtKJzjPoKFfz2ARQ4Jc6cd0nSpFTgkzD1U3wP0sGMonKM5ZPk8z8+m94Z2Nsuyq+ndqM8RJglzLzswfNuwq6qKmc1tWV6chxlhUcuh1D0Pzuhf3sBii4S5VS/YZJAwNzoINkPCXDMIDgk94Cc4bKhR4FBfo8LhLkdBZKMtokqt2RaXvg9G5M7ycRC5GZZXLBsXkdNnuVJ7xhMTvrwAyW/dDTpwk9sAAAAASUVORK5CYII="/>
+  </g>
+</svg>
