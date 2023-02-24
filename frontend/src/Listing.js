@@ -1,4 +1,5 @@
 import "flatpickr/dist/themes/material_green.css";
+import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 
 function Listing({
@@ -9,6 +10,13 @@ function Listing({
   sortType,
   sortColumn,
 }) {
+  const [showModal,setShowModal] = useState(false)
+  const [exchange,setExchange] = useState({})
+
+  const singleExchnage = (singleExchnage) => {
+    setExchange(singleExchnage);
+    setShowModal(true);
+  }
   return (
     <div className="card mt-5">
       <div className="card-header">
@@ -65,7 +73,8 @@ function Listing({
                         : {}
                     }
                     onClick={() => setSortTypeAndSortColumn("ASC", "dated")}
-                  ></i>  <i
+                  ></i>{" "}
+                  <i
                     className="fas fa-sort-amount-up"
                     style={
                       sortType == "DESC" && sortColumn == "dated"
@@ -73,7 +82,8 @@ function Listing({
                         : {}
                     }
                     onClick={() => setSortTypeAndSortColumn("DESC", "dated")}
-                  ></i>  Date & Time
+                  ></i>{" "}
+                  Date & Time
                 </th>
                 <td>
                   <i
@@ -227,22 +237,58 @@ function Listing({
             exchanges?.map((exchange, key) => {
               return (
                 <>
-                <div className="p-3 row bg-light" key={key}>
-                  <div className="col-9"> {exchange?.currency_from} ===> {exchange?.currency_to} <br /> {exchange?.amount_2} </div>
-                  <div className="col-3">
-                    <img
-                      src={exchange?.type == 'live_price' ?  "./icons/pngs/green.png" : "./icons/pngs/blue.png"  }
-                      style={{ width: "10px" }}
-                    />
+                  <div className="p-3 row bg-light" key={key} onClick={() => singleExchnage(exchange)}>
+                    <div className="col-9">
+                      {" "}
+                      {exchange?.currency_from} ===> {exchange?.currency_to}{" "}
+                      <br /> {exchange?.amount_2}{" "}
+                    </div>
+                    <div className="col-3">
+                      <img
+                        src={
+                          exchange?.type == "live_price"
+                            ? "./icons/pngs/green.png"
+                            : "./icons/pngs/blue.png"
+                        }
+                        style={{ width: "10px" }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <hr />
+                  <hr />
                 </>
               );
             })}
         </div>
         <br />
         <br />
+      </div>
+
+      <div class={showModal ? "modal d-block d-sm-none" : "modal d-none"} tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Exchange</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                onClick={() =>setShowModal(false)}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger btn-block" onClick={() => setShowModal(false)}>
+                close
+              </button>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
