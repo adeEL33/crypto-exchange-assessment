@@ -35,11 +35,12 @@ exports.create = () => {
                     to: toCurrency,
                   },
                 }).then(rate => {
+                  const amount1 = parseInt(Math.random() * 100);
                   const crypto_exchange_record = new CrptoExchangeRecord({
                     currency_from:fromCurrency,
                     currency_to:toCurrency,
-                    amount_1:1,
-                    amount_2:rate,
+                    amount_1:amount1,
+                    amount_2:(rate*amount1),
                     type:'live_price',
                   });
       

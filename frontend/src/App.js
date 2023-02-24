@@ -16,27 +16,33 @@ function App() {
   const [toDate, setToDate] = useState("");
 
   const fetchRecords = () => {
-    handleLoading(true);
-    axios
-      .get(
-        "http://localhost:8080/api/crypto_exchange_record?sort_type=" +
-          sortType +
-          "&sort_column=" +
-          sortColumn +
-          "&date=" +
-          date +
-          "&to_date=" +
-          toDate
-      )
-      .then((res) => {
-        if (res?.data?.status == "success") {
-          setExchanges(res?.data?.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => handleLoading(false));
+    // handleLoading(true);
+    // axios
+    //   .get(
+    //     "http://localhost:8080/api/crypto_exchange_record?sort_type=" +
+    //       sortType +
+    //       "&sort_column=" +
+    //       sortColumn +
+    //       "&date=" +
+    //       date +
+    //       "&to_date=" +
+    //       toDate
+    //   )
+    //   .then((res) => {
+
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+    //   .finally(() => handleLoading(false));
+    const socket = socketIOClient("http://localhost:8080");
+    socket.emit("fetchExchangeRecords", date, toDate, sortType, sortColumn);
+    setLoader(true);
+    socket.on('getData', (data) => {
+      console.log("fetched", data)
+      setExchanges(data);
+      setLoader(false);
+    })
   };
 
   const setDateFilter = (dateObject) => {
@@ -74,14 +80,7 @@ function App() {
 
   useEffect(() => {
     fetchRecords();
-  }, [date,toDate, sortType, sortColumn]);
-
-  useEffect(() => {
-    const socket = socketIOClient("http://localhost:8080");
-    socket.on("FromAPI", (data) => {
-      console.log(data);
-    });
-  }, []);
+  }, [date, toDate, sortType, sortColumn]);
   return (
     <div>
       {loader ? (
@@ -97,7 +96,7 @@ function App() {
       )}
 
       <div className="container mt-5">
-        <Form handleLoading={handleLoading} />
+        <Form handleLoading={handleLoading} fetchRecords={fetchRecords} />
         <Listing
           setSortTypeAndSortColumn={setSortTypeAndSortColumn}
           exchanges={exchanges}

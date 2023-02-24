@@ -30,7 +30,7 @@ CrptoExchangeRecord.getAll = (sort_type,sort_column,date,to_date, result) => {
   if (date && to_date){
     
     query += ` WHERE DATE_FORMAT(dated,'%Y-%m-%d') >= '${date}' `;
-    query += ' & ';
+    query += ' AND ';
     query += ` DATE_FORMAT(dated,'%Y-%m-%d') <= '${to_date}' `;
   }
   

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
 import ErrorHandling from './ErrorHandling.js';
-function Form({ handleLoading }) {
+function Form({ handleLoading,fetchRecords }) {
     const [state, setState] = useState({
         currency_from: '',
         currency_to: '',
@@ -30,6 +30,7 @@ function Form({ handleLoading }) {
                     type: 'exchanged'
                 })
                 setErrors(new ErrorHandling())
+                fetchRecords();
                 toast.success('Record is saved!')
             } else if (res.data.status == 'error') {
                 console.log(res.data);
