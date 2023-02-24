@@ -56,7 +56,11 @@ function Listing({
                   ></i>
                   <i
                     className="fas fa-sort-amount-up"
-                    style={ sortType == 'DESC' && sortColumn == 'dated'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "dated"
+                        ? { color: "blue" }
+                        : {}
+                    }
                     onClick={() => setSortTypeAndSortColumn("DESC", "dated")}
                   ></i>
                   Date & Time
@@ -64,14 +68,22 @@ function Listing({
                 <td>
                   <i
                     className="fas fa-sort-amount-down"
-                    style={ sortType == 'ASC' && sortColumn == 'currency_from'? {color:'blue'}: {}}
+                    style={
+                      sortType == "ASC" && sortColumn == "currency_from"
+                        ? { color: "blue" }
+                        : {}
+                    }
                     onClick={() =>
                       setSortTypeAndSortColumn("ASC", "currency_from")
                     }
                   ></i>{" "}
                   <i
                     className="fas fa-sort-amount-up"
-                    style={ sortType == 'DESC' && sortColumn == 'currency_from'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "currency_from"
+                        ? { color: "blue" }
+                        : {}
+                    }
                     onClick={() =>
                       setSortTypeAndSortColumn("DESC", "currency_from")
                     }
@@ -81,12 +93,20 @@ function Listing({
                 <td>
                   <i
                     className="fas fa-sort-amount-down"
-                    style={ sortType == 'ASC' && sortColumn == 'amount_1'? {color:'blue'}: {}}
+                    style={
+                      sortType == "ASC" && sortColumn == "amount_1"
+                        ? { color: "blue" }
+                        : {}
+                    }
                     onClick={() => setSortTypeAndSortColumn("ASC", "amount_1")}
                   ></i>{" "}
                   <i
                     className="fas fa-sort-amount-up"
-                    style={ sortType == 'DESC' && sortColumn == 'amount_1'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "amount_1"
+                        ? { color: "blue" }
+                        : {}
+                    }
                     onClick={() => setSortTypeAndSortColumn("DESC", "amount_1")}
                   ></i>{" "}
                   Amount 1
@@ -97,14 +117,22 @@ function Listing({
                     onClick={() =>
                       setSortTypeAndSortColumn("ASC", "currency_to")
                     }
-                    style={ sortType == 'ASC' && sortColumn == 'currency_to'? {color:'blue'}: {}}
+                    style={
+                      sortType == "ASC" && sortColumn == "currency_to"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   <i
                     className="fas fa-sort-amount-up"
                     onClick={() =>
                       setSortTypeAndSortColumn("DESC", "currency_to")
                     }
-                    style={ sortType == 'DESC' && sortColumn == 'currency_to'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "currency_to"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   Currency To
                 </td>
@@ -112,12 +140,20 @@ function Listing({
                   <i
                     className="fas fa-sort-amount-down"
                     onClick={() => setSortTypeAndSortColumn("ASC", "amount_2")}
-                    style={ sortType == 'ASC' && sortColumn == 'amount_2'? {color:'blue'}: {}}
+                    style={
+                      sortType == "ASC" && sortColumn == "amount_2"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   <i
                     className="fas fa-sort-amount-up"
                     onClick={() => setSortTypeAndSortColumn("DESC", "amount_2")}
-                    style={ sortType == 'DESC' && sortColumn == 'amount_2'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "amount_2"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   Amount 2
                 </td>
@@ -125,12 +161,20 @@ function Listing({
                   <i
                     className="fas fa-sort-amount-down"
                     onClick={() => setSortTypeAndSortColumn("ASC", "type")}
-                    style={ sortType == 'ASC' && sortColumn == 'type'? {color:'blue'}: {}}
+                    style={
+                      sortType == "ASC" && sortColumn == "type"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   <i
                     className="fas fa-sort-amount-up"
                     onClick={() => setSortTypeAndSortColumn("DESC", "type")}
-                    style={ sortType == 'DESC' && sortColumn == 'type'? {color:'blue'}: {}}
+                    style={
+                      sortType == "DESC" && sortColumn == "type"
+                        ? { color: "blue" }
+                        : {}
+                    }
                   ></i>{" "}
                   Type
                 </td>
@@ -167,6 +211,27 @@ function Listing({
             </tbody>
           </table>
         </div>
+        <div className="d-block d-sm-none">
+          {exchanges?.length > 0 &&
+            exchanges?.map((exchange, key) => {
+              return (
+                <>
+                <div className="p-3 row bg-light">
+                  <div className="col-9"> {exchange?.currency_from} ===> {exchange?.currency_to} <br /> {exchange?.amount_2} </div>
+                  <div className="col-3">
+                    <img
+                      src={exchange?.type == 'live_price' ?  "./icons/pngs/green.png" : "./icons/pngs/blue.png"  }
+                      style={{ width: "10px" }}
+                    />
+                  </div>
+                </div>
+                <hr />
+                </>
+              );
+            })}
+        </div>
+        <br />
+        <br />
       </div>
     </div>
   );
