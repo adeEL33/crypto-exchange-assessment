@@ -40,7 +40,7 @@ function Listing({
         </div>
       </div>
       <div className="card-body">
-        <div class="table-responsive d-none d-sm-block">
+        <div className="table-responsive d-none d-sm-block">
           <table className="table table-striped table-responsive">
             <thead>
               <tr>

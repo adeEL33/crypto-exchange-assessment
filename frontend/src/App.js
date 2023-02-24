@@ -4,6 +4,8 @@ import Form from "./Form";
 import Listing from "./Listing";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import socketIOClient from "socket.io-client";
+
 function App() {
   //defining loading state
   const [loader, setLoader] = useState(false);
@@ -71,6 +73,13 @@ function App() {
   useEffect(() => {
     fetchRecords();
   }, [date, type, sortColumn, sortType]);
+
+  useEffect(() => {
+    const socket = socketIOClient("http://localhost:8080");
+    socket.on("FromAPI", (data) => {
+      console.log(data);
+    });
+  }, []);
   return (
     <div>
       {loader ? (
