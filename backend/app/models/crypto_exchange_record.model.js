@@ -23,18 +23,15 @@ CrptoExchangeRecord.create = (newCrptoExchangeRecord, result) => {
   });
 };
 
-CrptoExchangeRecord.getAll = (sort_type,sort_column,date,type, result) => {
+CrptoExchangeRecord.getAll = (sort_type,sort_column,date,to_date, result) => {
   let query = "SELECT * FROM crypto_exchange_records";
-
-  if (date) {
-    query += ` WHERE DATE_FORMAT(dated,'%Y-%m-%d') = '${date}' `;
-  }
-
-  if (date && type){
+  
+  
+  if (date && to_date){
+    
+    query += ` WHERE DATE_FORMAT(dated,'%Y-%m-%d') >= '${date}' `;
     query += ' & ';
-  }
-  if (type) {
-    query += ` WHERE type = '${type}' `;
+    query += ` DATE_FORMAT(dated,'%Y-%m-%d') <= '${to_date}' `;
   }
   
   if(sort_type && sort_column){

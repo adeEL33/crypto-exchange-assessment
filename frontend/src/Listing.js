@@ -4,7 +4,7 @@ import Flatpickr from "react-flatpickr";
 function Listing({
   exchanges,
   setDateFilter,
-  setTypeFilter,
+  setToDateFilter,
   setSortTypeAndSortColumn,
   sortType,
   sortColumn,
@@ -13,9 +13,9 @@ function Listing({
     <div className="card mt-5">
       <div className="card-header">
         <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-12">
+          <div className="col-6">
             <div className="form-group">
-              <label>Date Filter</label>
+              <label>From Date</label>
               <Flatpickr
                 className="form-control mt-2"
                 onChange={([date]) => {
@@ -24,7 +24,19 @@ function Listing({
               />
             </div>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
+
+          <div className="col-6">
+            <div className="form-group">
+              <label>To Date</label>
+              <Flatpickr
+                className="form-control mt-2"
+                onChange={([date]) => {
+                  setToDateFilter({ date });
+                }}
+              />
+            </div>
+          </div>
+          {/* <div className="col-4">
             <div className="form-group">
               <label>Type Filter</label>
               <select
@@ -36,7 +48,7 @@ function Listing({
                 <option value="exchanged">Exchanged</option>
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="card-body">
@@ -53,8 +65,7 @@ function Listing({
                         : {}
                     }
                     onClick={() => setSortTypeAndSortColumn("ASC", "dated")}
-                  ></i>
-                  <i
+                  ></i>  <i
                     className="fas fa-sort-amount-up"
                     style={
                       sortType == "DESC" && sortColumn == "dated"
@@ -62,8 +73,7 @@ function Listing({
                         : {}
                     }
                     onClick={() => setSortTypeAndSortColumn("DESC", "dated")}
-                  ></i>
-                  Date & Time
+                  ></i>  Date & Time
                 </th>
                 <td>
                   <i
@@ -211,12 +221,13 @@ function Listing({
             </tbody>
           </table>
         </div>
+
         <div className="d-block d-sm-none">
           {exchanges?.length > 0 &&
             exchanges?.map((exchange, key) => {
               return (
                 <>
-                <div className="p-3 row bg-light">
+                <div className="p-3 row bg-light" key={key}>
                   <div className="col-9"> {exchange?.currency_from} ===> {exchange?.currency_to} <br /> {exchange?.amount_2} </div>
                   <div className="col-3">
                     <img

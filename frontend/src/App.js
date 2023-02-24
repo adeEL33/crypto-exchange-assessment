@@ -13,7 +13,7 @@ function App() {
   const [sortType, setSortType] = useState("DESC");
   const [sortColumn, setSortColumn] = useState("id");
   const [date, setDate] = useState("");
-  const [type, setType] = useState("");
+  const [toDate, setToDate] = useState("");
 
   const fetchRecords = () => {
     handleLoading(true);
@@ -25,8 +25,8 @@ function App() {
           sortColumn +
           "&date=" +
           date +
-          "&type=" +
-          type
+          "&to_date=" +
+          toDate
       )
       .then((res) => {
         if (res?.data?.status == "success") {
@@ -38,12 +38,14 @@ function App() {
       })
       .finally(() => handleLoading(false));
   };
+
   const setDateFilter = (dateObject) => {
     console.log(dateObject);
     setDate(dateformate(dateObject?.date));
   };
-  const setTypeFilter = (typeFilter) => {
-    setType(typeFilter);
+
+  const setToDateFilter = (toDate) => {
+    setToDate(dateformate(toDate?.date));
   };
 
   //set loader true or false
@@ -72,7 +74,7 @@ function App() {
 
   useEffect(() => {
     fetchRecords();
-  }, [date, type, sortColumn, sortType]);
+  }, [date,toDate, sortType, sortColumn]);
 
   useEffect(() => {
     const socket = socketIOClient("http://localhost:8080");
@@ -101,7 +103,7 @@ function App() {
           exchanges={exchanges}
           date={date}
           setDateFilter={setDateFilter}
-          setTypeFilter={setTypeFilter}
+          setToDateFilter={setToDateFilter}
           sortColumn={sortColumn}
           sortType={sortType}
         />

@@ -63,10 +63,10 @@ exports.findAll = (req, res) => {
   const date = req.query.date;
   const sort_type = req.query.sort_type;
   const sort_column = req.query.sort_column;
-  const type = req.query.type;
+  const to_date = req.query.to_date;
 
 
-  CrptoExchangeRecord.getAll(sort_type,sort_column,date,type, (err, data) => {
+  CrptoExchangeRecord.getAll(sort_type,sort_column,date,to_date, (err, data) => {
     if (err){
       res.json({
         status: "error",
