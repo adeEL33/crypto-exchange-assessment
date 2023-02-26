@@ -2,24 +2,32 @@ import "flatpickr/dist/themes/material_green.css";
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 
+//listing component with functions and states passed from parent component as props
 function Listing({
-    exchanges,
-    setDateFilter,
-    setToDateFilter,
-    setSortTypeAndSortColumn,
-    sortType,
-    sortColumn,
+    exchanges,//exchange records
+    setDateFilter, //function to set from date filter
+    setToDateFilter,//function to set to date filter
+    setSortTypeAndSortColumn,//function to set sort type and sort column
+    sortType,//sortType state
+    sortColumn,//sort column state
 }) {
+    //defining and initializing modal state to show in mobile view
     const [showModal, setShowModal] = useState(false)
+    //setting up single exchange record to show in modal in mobile view
     const [exchange, setExchange] = useState({})
 
+    //function to set single exchange record
     const singleExchnage = (singleExchnage) => {
         setExchange(singleExchnage);
         setShowModal(true);
     }
+
     return (
         <div className="card mt-5">
+            {/* available filters works on changing we could have a button for that also */}
             <div className="card-header">
+                <h4>Filters</h4>
+                <hr />
                 <div className="row">
                     <div className="col-6">
                         <div className="form-group">
@@ -60,6 +68,7 @@ function Listing({
                 </div>
             </div>
             <div className="card-body">
+                {/* tabular view will not show on mobile screens */}
                 <div className="table-responsive d-none d-sm-block">
                     <table className="table table-striped table-responsive">
                         <thead>
@@ -67,20 +76,24 @@ function Listing({
                                 <th>
                                     <i
                                         className="fas fa-sort-amount-down"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "dated"
                                                 ? { color: "blue" }
                                                 : {}
                                         }
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("ASC", "dated")}
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "dated"
                                                 ? { color: "blue" }
                                                 : {}
                                         }
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("DESC", "dated")}
                                     ></i>{" "}
                                     Date & Time
@@ -88,22 +101,26 @@ function Listing({
                                 <td>
                                     <i
                                         className="fas fa-sort-amount-down"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "currency_from"
                                                 ? { color: "blue" }
                                                 : {}
                                         }
+                                        //on click seting the column and type of sorting
                                         onClick={() =>
                                             setSortTypeAndSortColumn("ASC", "currency_from")
                                         }
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "currency_from"
                                                 ? { color: "blue" }
                                                 : {}
                                         }
+                                        //on click seting the column and type of sorting
                                         onClick={() =>
                                             setSortTypeAndSortColumn("DESC", "currency_from")
                                         }
@@ -113,6 +130,7 @@ function Listing({
                                 <td>
                                     <i
                                         className="fas fa-sort-amount-down"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "amount_1"
                                                 ? { color: "blue" }
@@ -122,11 +140,13 @@ function Listing({
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "amount_1"
                                                 ? { color: "blue" }
                                                 : {}
                                         }
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("DESC", "amount_1")}
                                     ></i>{" "}
                                     Amount 1
@@ -137,6 +157,7 @@ function Listing({
                                         onClick={() =>
                                             setSortTypeAndSortColumn("ASC", "currency_to")
                                         }
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "currency_to"
                                                 ? { color: "blue" }
@@ -145,9 +166,11 @@ function Listing({
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //on click seting the column and type of sorting
                                         onClick={() =>
                                             setSortTypeAndSortColumn("DESC", "currency_to")
                                         }
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "currency_to"
                                                 ? { color: "blue" }
@@ -159,7 +182,9 @@ function Listing({
                                 <td>
                                     <i
                                         className="fas fa-sort-amount-down"
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("ASC", "amount_2")}
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "amount_2"
                                                 ? { color: "blue" }
@@ -168,7 +193,9 @@ function Listing({
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("DESC", "amount_2")}
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "amount_2"
                                                 ? { color: "blue" }
@@ -180,7 +207,9 @@ function Listing({
                                 <td>
                                     <i
                                         className="fas fa-sort-amount-down"
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("ASC", "type")}
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "ASC" && sortColumn == "type"
                                                 ? { color: "blue" }
@@ -189,7 +218,9 @@ function Listing({
                                     ></i>{" "}
                                     <i
                                         className="fas fa-sort-amount-up"
+                                        //on click seting the column and type of sorting
                                         onClick={() => setSortTypeAndSortColumn("DESC", "type")}
+                                        //highliting current sort type and sort column by checking 
                                         style={
                                             sortType == "DESC" && sortColumn == "type"
                                                 ? { color: "blue" }
@@ -204,9 +235,11 @@ function Listing({
                             <tr>
                                 <th colSpan={6}></th>
                             </tr>
-
+                            {/* checking the length of records */}
                             {exchanges?.length > 0 &&
+                            
                                 exchanges?.map((exchange, key) => {
+                                    {/* iterating through the records */}
                                     return (
                                         <tr key={key}>
                                             <td>{exchange?.dated}</td>
@@ -231,12 +264,13 @@ function Listing({
                         </tbody>
                     </table>
                 </div>
-
+                {/*this view will  show only  on mobile screens */}
                 <div className="d-block d-sm-none">
                     {exchanges?.length > 0 &&
                         exchanges?.map((exchange, key) => {
                             return (
                                 <>
+                                {/* on click a modal will show up with detail of the single exchange record in mobile view */}
                                     <div className="p-3 row bg-light" key={key} onClick={() => singleExchnage(exchange)}>
                                         <div className="col-9">
                                             {" "}
@@ -262,7 +296,7 @@ function Listing({
                 <br />
                 <br />
             </div>
-
+            {/* modal to show single record detail in mobile view */}
             <div className={showModal ? "modal d-block d-sm-none" : "modal d-none"} tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
